@@ -1,6 +1,7 @@
 package Unit01;
 
-import java.util.Random;
+import java.util.HashSet;
+import java.lang.Math;
 
 /**
  * <pre>
@@ -13,12 +14,14 @@ import java.util.Random;
  */
 public class Exercise09 {
     public static void main(String[] args) {
-        Random random = new Random();
-        for (int i = 0; i < 10; ++i) {
-            System.out.println(random.nextInt(100));
+        HashSet<Integer> set = new HashSet<>();
+        while (set.size() != 10) {
+            double r = Math.random();
+            int i = (int) (r * Math.round(10.0));
+            set.add(i);
         }
-        for (int i = 0; i < 10; ++i) {
-            System.out.println(random.nextInt(10));
+        for (var s : set) {
+            System.out.println(s);
         }
     }
 }
