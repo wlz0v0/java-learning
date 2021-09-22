@@ -1,4 +1,4 @@
-package Unit02;
+package Unit02Part1;
 
 import java.util.Scanner;
 
@@ -21,5 +21,6 @@ public class Exercise06 {
         Exercise06.two = scanner.nextInt();
         System.out.println(exercise06.one);
         System.out.println(Exercise06.two);
+
     }
 }

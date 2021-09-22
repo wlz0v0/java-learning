@@ -1,4 +1,4 @@
-package Unit02;
+package Unit02Part1;
 
 /**
  * <pre>
@@ -34,3 +34,4 @@ public class Exercise10 {
         rhs = temp;
     }
 }
+

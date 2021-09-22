@@ -1,4 +1,4 @@
-package Unit02;
+package Unit02Part1;
 
 /**
  * <pre>
@@ -12,6 +12,7 @@ package Unit02;
 public class Exercise05 {
     int one = 1;
     static int two = 2;
+
 
     public static void main(String[] args) {
         Exercise05 exercise05 = new Exercise05();
