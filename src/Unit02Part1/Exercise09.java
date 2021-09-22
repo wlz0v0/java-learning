@@ -11,10 +11,11 @@ package Unit02Part1;
  */
 public class Exercise09 {
     public static void main(String[] args) {
-        char[] line1 = {'a', 'b', 'c', 'd'};
-        char[] line2 = {'x', 'y', 'z'};
-        char[] line3 = {'1', '2'};
-        char[][] arr = {line1, line2, line3};
+        char[][] arr = {
+                {'a', 'b', 'c', 'd'},
+                {'x', 'y', 'z'},
+                {'1', '2'}
+        };
         for (var chs : arr) {
             System.out.println("length: " + chs.length);
             for (var ch : chs) {
