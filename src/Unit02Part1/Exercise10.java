@@ -22,14 +22,8 @@ public class Exercise10 {
         System.out.println("integer after swap\n" + c + " " + d);
     }
 
-    private void swap(int lhs, int rhs) {
-        int temp = lhs;
-        lhs = rhs;
-        rhs = temp;
-    }
-
-    private void swap(Integer lhs, Integer rhs) {
-        Integer temp = lhs;
+    private <T> void swap(T lhs, T rhs) {
+        T temp = lhs;
         lhs = rhs;
         rhs = temp;
     }
