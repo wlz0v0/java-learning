@@ -1,4 +1,4 @@
-package Unit02Part2.Exercise05;
+package Unit02.Part2.Exercise05;
 
 import java.util.Scanner;
 

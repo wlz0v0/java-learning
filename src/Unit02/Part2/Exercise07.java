@@ -1,4 +1,4 @@
-package Unit02Part2;
+package Unit02.Part2;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

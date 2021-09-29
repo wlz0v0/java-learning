@@ -1,7 +1,6 @@
-package Unit02Part2;
+package Unit02.Part2;
 
 import java.util.Calendar;
-import java.util.Date;
 
 /**
  * <pre>
