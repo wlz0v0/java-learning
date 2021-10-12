@@ -70,7 +70,7 @@ public class Robot {
     @Override
     public String toString() {
         return name + ":\n" +
-                "x = " + Integer.valueOf(position.getX()).toString() + ", "
-                + "y = " + Integer.valueOf(position.getY()).toString();
+                "x = " + position.getX() + ", "
+                + "y = " + position.getY();
     }
 }

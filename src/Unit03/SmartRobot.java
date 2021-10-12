@@ -1,7 +1,5 @@
 package Unit03;
 
-import java.util.Arrays;
-
 /**
  * <pre>
  *     author : 武连增
@@ -12,7 +10,7 @@ import java.util.Arrays;
  * </pre>
  */
 public class SmartRobot extends Robot {
-    private int[][] stepsRecord; // 初始为-1，走一步数值+1
+    private final int[][] stepsRecord; // 初始为-1，走一步数值+1
     private final int offset;
     private int stepCnt;
 
