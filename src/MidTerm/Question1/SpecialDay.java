@@ -1,20 +1,20 @@
 package MidTerm.Question1;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/10/13
- *     desc   :
- *     version:
- * </pre>
+ * 节日类，实现了中秋节，国庆节接口
  */
 public class SpecialDay implements MidAutumn, NationalDay{
+    /**
+     * 实现MidAutumn接口方法
+     */
     @Override
     public void eatMooncake() {
         System.out.println("Eat a mooncake");
     }
 
+    /**
+     * 实现NationalDay接口方法
+     */
     @Override
     public void singSong() {
         System.out.println("Sing a song");

@@ -10,5 +10,8 @@ package MidTerm.Question1;
  * </pre>
  */
 public interface MidAutumn {
+    /**
+     * 吃一块月饼
+     */
     void eatMooncake();
 }

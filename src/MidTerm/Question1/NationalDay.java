@@ -10,5 +10,8 @@ package MidTerm.Question1;
  * </pre>
  */
 public interface NationalDay {
+    /**
+     * 唱一首国歌
+     */
     void singSong();
 }
