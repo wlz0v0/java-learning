@@ -26,7 +26,11 @@ public class HelloApplication extends Application {
         hBox.setAlignment(Pos.CENTER);
 
         TextField textField = new TextField();
-        textField.setText("咏鹅");
+        textField.setText("咏鹅\n" +
+                "鹅鹅鹅，\n" +
+                "曲项向天歌。\n" +
+                "白毛浮绿水，\n" +
+                "红掌拨清波。");
 
         String[][] bagua = {{"乾", "坤", "震", "巽"},
                 {"坎", "离", "艮", "兑"}};
