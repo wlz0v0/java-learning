@@ -121,8 +121,8 @@ public class Clock extends Application {
         timeline.play();
 
         var scene = new Scene(fatherPane, 900, 600);
-        stage.setScene(scene);
         stage.setTitle("这是一块表");
+        stage.setScene(scene);
         stage.show();
     }
 
