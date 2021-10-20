@@ -11,19 +11,21 @@ import javafx.stage.Stage;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
-        Rectangle rectangle = new Rectangle();
+        var rectangle = new Rectangle();
         rectangle.setHeight(200);
         rectangle.setWidth(500);
-        FlowPane pane = new FlowPane();
+        var pane = new FlowPane();
 
         pane.getChildren().add(rectangle);
         pane.setAlignment(Pos.CENTER);
-        Scene scene = new Scene(pane, 1000, 400);
+        var scene = new Scene(pane, 1000, 400);
+        rectangle.heightProperty().bind(scene.heightProperty().divide(2));
+        rectangle.widthProperty().bind(scene.widthProperty().divide(2));
         scene.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
-            double clickX = mouseEvent.getX();
-            double clickY = mouseEvent.getY();
-            double recHeight = rectangle.getHeight();
-            double recWidth = rectangle.getWidth();
+            var clickX = mouseEvent.getX();
+            var clickY = mouseEvent.getY();
+            var recHeight = rectangle.getHeight();
+            var recWidth = rectangle.getWidth();
             if (clickX >= recWidth / 2
                     && clickX <= recWidth / 2 * 3
                     && clickY >= recHeight / 2
@@ -35,13 +37,6 @@ public class HelloApplication extends Application {
         });
         stage.setScene(scene);
         stage.show();
-        Thread adaptSizeThread = new Thread(() -> {
-            while (true) {
-                rectangle.setWidth(scene.getWidth() / 2);
-                rectangle.setHeight(scene.getHeight() / 2);
-            }
-        });
-        adaptSizeThread.start();
     }
 
     public static void main(String[] args) {
