@@ -19,9 +19,12 @@ public class HelloApplication extends Application {
         pane.getChildren().add(rectangle);
         pane.setAlignment(Pos.CENTER);
         var scene = new Scene(pane, 1000, 400);
-        rectangle.heightProperty().bind(scene.heightProperty().divide(2));
-        rectangle.widthProperty().bind(scene.widthProperty().divide(2));
-        scene.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {
+        rectangle.heightProperty()
+                .bind(scene.heightProperty().divide(2));
+        rectangle.widthProperty()
+                .bind(scene.widthProperty().divide(2));
+        scene.addEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent ->
+        {
             var clickX = mouseEvent.getX();
             var clickY = mouseEvent.getY();
             var recHeight = rectangle.getHeight();

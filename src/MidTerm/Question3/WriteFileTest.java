@@ -45,7 +45,9 @@ public class WriteFileTest {
             outputStream = new FileOutputStream(file);
             for (var str : strings) {
                 // 采用UTF-8字符集输出
-                outputStream.write(str.getBytes(StandardCharsets.UTF_8));
+                outputStream.write(
+                        str.getBytes(
+                                StandardCharsets.UTF_8));
             }
         } catch (IOException e) {
             e.printStackTrace();
