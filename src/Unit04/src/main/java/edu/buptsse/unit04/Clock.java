@@ -31,26 +31,28 @@ public class Clock extends Application {
     private int minute;
     // 保存秒数
     private int second;
+    // 表的圆心的X坐标
+    private final double CIRCLE_CENTER_X = 450.0;
+    // 表的圆心的Y坐标
+    private final double CIRCLE_CENTER_Y = 300.0;
 
     @Override
     public void start(Stage stage) {
-        // 表的圆心的X坐标
-        final int CIRCLE_CENTER_X = 450;
-        // 表的圆心的Y坐标
-        final int CIRCLE_CENTER_Y = 300;
+        // 表的半径
+        final var CIRCLE_RADIUS = 100.0;
         // 时针长度
-        final int HOUR_HAND_LENGTH = 40;
+        final var HOUR_HAND_LENGTH = 40.0;
         // 分针长度
-        final int MINUTE_HAND_LENGTH = 60;
+        final var MINUTE_HAND_LENGTH = 60.0;
         // 秒针长度
-        final int SECOND_HAND_LENGTH = 80;
+        final var SECOND_HAND_LENGTH = 80.0;
         // π
-        final double PI = 3.14159;
+        final var PI = 3.14159;
         // 画一个圆心在450,300 半径为100的圆作为表框
         var circle = new Circle();
         circle.setCenterX(CIRCLE_CENTER_X);
         circle.setCenterY(CIRCLE_CENTER_Y);
-        circle.setRadius(100);
+        circle.setRadius(CIRCLE_RADIUS);
         circle.setStroke(Color.BLACK);
         circle.setFill(Color.WHITE);
 
@@ -138,7 +140,7 @@ public class Clock extends Application {
      * @return 表针结束点X坐标
      */
     private double calculateEndPointX(double angle, double length) {
-        return 450.0 + length * Math.sin(angle);
+        return CIRCLE_CENTER_X + length * Math.sin(angle);
     }
 
     /**
@@ -149,7 +151,7 @@ public class Clock extends Application {
      * @return 表针结束点Y坐标
      */
     private double calculateEndPointY(double angle, double length) {
-        return 300.0 - length * Math.cos(angle);
+        return CIRCLE_CENTER_Y - length * Math.cos(angle);
     }
 
     /**
