@@ -1,13 +1,7 @@
 package Lab1.Project2;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/11/03
- *     desc   :
- *     version:
- * </pre>
+ * Triangle.java
  */
 public final class Triangle extends GeometricObject {
     private double side1;

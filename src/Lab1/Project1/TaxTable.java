@@ -1,13 +1,7 @@
 package Lab1.Project1;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/11/03
- *     desc   :
- *     version:
- * </pre>
+ * TaxTable.java
  */
 public class TaxTable {
     public static void main(String[] args) {
