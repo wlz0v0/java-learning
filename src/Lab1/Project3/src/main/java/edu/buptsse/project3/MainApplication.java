@@ -5,15 +5,15 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class HelloApplication extends Application {
+/**
+ * MainApplication.java
+ */
+public class MainApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
@@ -56,14 +56,14 @@ public class HelloApplication extends Application {
         pane.getChildren().add(car4);
 
         var scene = new Scene(pane, 600, 300);
-        car1.setLayoutX(scene.getWidth());
-        car2.setLayoutX(scene.getWidth());
-        car3.setLayoutX(scene.getWidth());
-        car4.setLayoutX(scene.getWidth());
-        car1.setLayoutY(50);
-        car2.setLayoutY(100);
-        car3.setLayoutY(150);
-        car4.setLayoutY(200);
+        car1.setX(scene.getWidth());
+        car2.setX(scene.getWidth());
+        car3.setX(scene.getWidth());
+        car4.setX(scene.getWidth());
+        car1.setY(50);
+        car2.setY(100);
+        car3.setY(150);
+        car4.setY(200);
         var timeLine = new Timeline();
         timeLine.setCycleCount(Timeline.INDEFINITE);
         var keyFrame = new KeyFrame(Duration.seconds(0.01), actionEvent -> {
@@ -84,9 +84,9 @@ public class HelloApplication extends Application {
             speedStr += '1';
         }
         car.setSpeed(Math.log(Double.parseDouble(speedStr)) + 1);
-        car.setLayoutX(car.getLayoutX() - 0.04 * 100 / car.getSpeed());
-        if (car.getLayoutX() < -70) {
-            car.setLayoutX(scene.getWidth());
+        car.setX(car.getX() - 0.04 * 100 / car.getSpeed());
+        if (car.getX() < -70) {
+            car.setX(scene.getWidth());
         }
     }
 }
