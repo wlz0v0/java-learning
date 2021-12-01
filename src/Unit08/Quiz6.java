@@ -12,6 +12,8 @@ import java.sql.*;
  * </pre>
  */
 public class Quiz6 {
+    private final static String user = "";
+    private final static String pwd = "";
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -19,7 +21,7 @@ public class Quiz6 {
             e.printStackTrace();
         }
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/unit08", "root", "wlz123hhh");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/unit08", user, pwd);
             Statement statement = conn.createStatement();
             statement.executeUpdate("insert into Person (Name, age, marriage) values ('Kitty', 13, false)");
             statement.executeUpdate("update Person set Name='Hello Kitty' where Name='Kitty'");
