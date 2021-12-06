@@ -9,8 +9,8 @@ package Lab2.Project2;
  *     version:
  * </pre>
  */
-public class Test {
-    public final static int round = 20;
+public class MultiThread {
+    public final static int ROUND = 20;
 
     public static void main(String[] args) {
         var a = new RandomCharThread();

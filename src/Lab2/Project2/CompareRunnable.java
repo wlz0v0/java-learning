@@ -27,7 +27,8 @@ public class CompareRunnable implements Runnable {
         int aPoint = 0;
         int bPoint = 0;
 
-        for (int i = 1; i <= Test.round; ++i) {
+        for (int i = 1; i <= MultiThread.ROUND; ++i) {
+            // 等待a、b线程生成字符
             while (aThread.stop || bThread.stop) {
                 Thread.onSpinWait();
             }
