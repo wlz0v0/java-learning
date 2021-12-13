@@ -1,13 +1,7 @@
 package Lab2.Project2;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/03
- *     desc   :
- *     version:
- * </pre>
+ * 比较字符类，实现Runnable，用于创建一个线程来比较字符
  */
 public class CompareRunnable implements Runnable {
     public final RandomCharThread aThread;
@@ -28,7 +22,7 @@ public class CompareRunnable implements Runnable {
         int bPoint = 0;
 
         for (int i = 1; i <= MultiThread.ROUND; ++i) {
-            // 等待a、b线程生成字符
+            // 阻塞当前线程，等待a、b线程生成字符
             while (aThread.stop || bThread.stop) {
                 Thread.onSpinWait();
             }
@@ -37,6 +31,7 @@ public class CompareRunnable implements Runnable {
             bSleepDuration = bThread.millis;
             b = bThread.ch;
 
+            // 计算分数
             if (a > b) {
                 aPoint += 2;
             } else if (a == b) {
@@ -48,9 +43,11 @@ public class CompareRunnable implements Runnable {
 
             System.out.println(i + "  " + aSleepDuration + "  " + a + "  " + aPoint +
                     "  " + bSleepDuration + "  " + b + "  " + bPoint);
+            // 重置阻塞条件
             aThread.stop = true;
             bThread.stop = true;
         }
+        // 根据得分输出胜负结果
         if (aPoint > bPoint) {
             System.out.println("A is the winner");
         } else if (aPoint == bPoint) {

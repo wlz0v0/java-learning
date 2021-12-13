@@ -19,6 +19,7 @@ public class SocketServer {
     public final static int round = 20;
     public final static int SERVER_PORT = 11778;
     public final static int CLIENT_PORT = 1778;
+    // 采用volatile保证字段可见性
     private static volatile boolean tcpStop = false;
     private static volatile boolean udpStop = false;
     private static Choice tcpChoice;
@@ -37,10 +38,13 @@ public class SocketServer {
                     tcpChoice = (Choice) ois.readObject();
                     tcpSleep = ois.readInt();
                     tcpStop = true;
+
+                    // 等待主线程处理数据
                     while (tcpStop) {
                         Thread.onSpinWait();
                     }
                     oos.writeBoolean(true);
+                    // 刷新缓冲区确保数据写出去了
                     oos.flush();
                 }
             } catch (IOException | ClassNotFoundException e) {
@@ -62,6 +66,7 @@ public class SocketServer {
                         udpSleep = ois.readInt();
                         udpStop = true;
 
+                        // 等待主线程处理数据
                         while (udpStop) {
                             Thread.onSpinWait();
                         }
@@ -82,6 +87,7 @@ public class SocketServer {
         int tcpPoint = 0;
         int udpPoint = 0;
         for (int i = 1; i <= round; ++i) {
+            // 阻塞主线程直到两个客户端的数据都接收到
             while (!tcpStop || !udpStop) {
                 Thread.onSpinWait();
             }
@@ -93,6 +99,7 @@ public class SocketServer {
                 ++tcpPoint;
                 ++udpPoint;
             }
+            // SCISSORS比较长，为了输出的更加好看，SCISSORS一个制表符，剩下的两个制表符
             String table1 = tcpChoice.equals(Choice.SCISSORS) ? "\t" : "\t\t";
             String table2 = udpChoice.equals(Choice.SCISSORS) ? "\t" : "\t\t";
             System.out.println(i + "\t" + tcpSleep + "\t" + tcpChoice + table1 + tcpPoint +

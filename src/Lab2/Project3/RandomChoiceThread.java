@@ -12,8 +12,8 @@ import java.util.Random;
  * </pre>
  */
 public class RandomChoiceThread extends Thread {
-    private final SendCallback sendCallback;
-    private final ReceiveCallback receiveCallback;
+    private final SendInterface sendCallback;
+    private final ReceiveInterface receiveCallback;
     public Choice choice;
     public int millis;
     public volatile boolean stop = false;
@@ -22,7 +22,7 @@ public class RandomChoiceThread extends Thread {
      * @param sendCallback    发送数据回调函数
      * @param receiveCallback 接收数据回调函数
      */
-    public RandomChoiceThread(SendCallback sendCallback, ReceiveCallback receiveCallback) {
+    public RandomChoiceThread(SendInterface sendCallback, ReceiveInterface receiveCallback) {
         this.sendCallback = sendCallback;
         this.receiveCallback = receiveCallback;
     }
@@ -38,18 +38,27 @@ public class RandomChoiceThread extends Thread {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            choice = Choice.valueOf(random.nextInt(3));
+            choice = Choice.getChoice(random.nextInt(3));
+
             sendCallback.send(choice, millis);
+            // 通过阻塞式receive阻塞线程直到获取服务端反馈再生成下一组数据
             receiveCallback.receive();
         }
         stop = true;
     }
 
-    public interface SendCallback {
+    /**
+     * 发送数据接口，本类将通过实现的send方法把生成的选择和线程睡眠时间发送给服务端
+     */
+    public interface SendInterface {
         void send(Choice choice, int sleepDuration);
     }
 
-    public interface ReceiveCallback {
+    /**
+     * 接收数据接口，本类将通过实现的receive方法接收服务端的反馈<br>
+     * receive方法应当是阻塞式的
+     */
+    public interface ReceiveInterface {
         void receive();
     }
 }

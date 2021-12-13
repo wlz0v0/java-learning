@@ -1,48 +1,56 @@
 package Lab2.Project3;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/04
- *     desc   :
- *     version:
- * </pre>
+ * 定义石头剪刀布三种选择的枚举类<br>
+ * 实现Serializable以通过网络传输
  */
 public enum Choice implements Serializable {
-    ROCK(0),
-    SCISSORS(1),
-    PAPER(2);
+    ROCK,
+    SCISSORS,
+    PAPER;
 
+    /**
+     * 用HashMap保存克制和被克制关系
+     */
+    private final static HashMap<Choice, Choice> counter = new HashMap<>();
+    private final static HashMap<Choice, Choice> countered = new HashMap<>();
+    private final static HashMap<Integer, Choice> choice = new HashMap<>();
     private final static long serialVersionUID = 2800000593502041295L;
 
-    final int value;
-
-    Choice(int value) {
-        this.value = value;
+    static {
+        counter.put(ROCK, SCISSORS);
+        counter.put(SCISSORS, PAPER);
+        counter.put(PAPER, ROCK);
+        countered.put(ROCK, PAPER);
+        countered.put(SCISSORS, ROCK);
+        countered.put(PAPER, SCISSORS);
+        choice.put(0, ROCK);
+        choice.put(1, SCISSORS);
+        choice.put(2, PAPER);
     }
 
-    public static Choice valueOf(int value) {
-        value %= 3;
-        switch (value) {
-            case 0:
-                return ROCK;
-            case 1:
-                return SCISSORS;
-            case 2:
-                return PAPER;
-            default:
-                return null;
-        }
+    /**
+     * @param val 0——石头，1——剪刀，2——布
+     * @return 值对应选择 0——石头，1——剪刀，2——布
+     */
+    public static Choice getChoice(int val) {
+        return choice.get(val);
     }
 
-    Choice getCounter() {
-        return valueOf(this.value + 1);
+    /**
+     * @return 该选择克制的选择，石头——剪刀，剪刀——布，布——石头
+     */
+    public Choice getCounter() {
+        return counter.get(this);
     }
 
-    Choice getCountered() {
-        return valueOf(this.value + 2);
+    /**
+     * @return 克制该选择的选择，石头——布，剪刀——石头，布——剪刀
+     */
+    public Choice getCountered() {
+        return countered.get(this);
     }
 }

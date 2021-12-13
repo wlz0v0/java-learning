@@ -3,13 +3,7 @@ package Lab2.Project2;
 import java.util.Random;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/03
- *     desc   :
- *     version:
- * </pre>
+ * 生成随机字符类，继承Thread
  */
 public class RandomCharThread extends Thread {
     public char ch;
@@ -30,7 +24,7 @@ public class RandomCharThread extends Thread {
             }
             ch = (char) (random.nextInt(26) + 'a');
             stop = false;
-            // 等待c线程输出结果
+            // 阻塞线程，等待c线程输出结果
             while (!stop) {
                 Thread.onSpinWait();
             }

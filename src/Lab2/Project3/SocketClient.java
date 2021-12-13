@@ -28,12 +28,13 @@ public class SocketClient {
              var ois = new ObjectInputStream(socket.getInputStream());
              var datagramSocket = new DatagramSocket(CLIENT_PORT)) {
 
-            var aThread = new RandomChoiceThread(
+            // TCPClient线程
+            var tcpThread = new RandomChoiceThread(
                     (choice, sleepDuration) -> {
                         try {
                             oos.writeObject(choice);
                             oos.writeInt(sleepDuration);
-                            System.out.println("a" + choice + " " + sleepDuration);
+                            // System.out.println("a" + choice + " " + sleepDuration);
                             oos.flush();
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -48,7 +49,8 @@ public class SocketClient {
                     }
             );
 
-            var bThread = new RandomChoiceThread(
+            // UDPClient线程
+            var udpThread = new RandomChoiceThread(
                     (choice, sleepDuration) -> {
                         try (var bos = new ByteArrayOutputStream();
                              var oos2 = new ObjectOutputStream(bos)) {
@@ -59,7 +61,7 @@ public class SocketClient {
                             var address = InetAddress.getLocalHost();
                             var packet = new DatagramPacket(bytes, bytes.length, address, SERVER_PORT);
                             datagramSocket.send(packet);
-                            System.out.println("b" + choice + " " + sleepDuration);
+                            // System.out.println("b" + choice + " " + sleepDuration);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
@@ -75,9 +77,11 @@ public class SocketClient {
                     }
             );
 
-            aThread.start();
-            bThread.start();
-            while (!aThread.stop || !bThread.stop) {
+            tcpThread.start();
+            udpThread.start();
+            // 这个while循环是为了在TCP和UDP客户端结束任务之后，通过try-with-resource自动关闭资源
+            // 如果不阻塞主线程则Socket会提前关闭，导致通信失败
+            while (!tcpThread.stop || !udpThread.stop) {
                 Thread.onSpinWait();
             }
         } catch (IOException e) {
