@@ -16,6 +16,8 @@ public enum Choice implements Serializable {
     SCISSORS(1),
     PAPER(2);
 
+    private final static long serialVersionUID = 2800000593502041295L;
+
     final int value;
 
     Choice(int value) {

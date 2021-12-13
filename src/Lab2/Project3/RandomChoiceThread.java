@@ -12,14 +12,19 @@ import java.util.Random;
  * </pre>
  */
 public class RandomChoiceThread extends Thread {
+    private final SendCallback sendCallback;
+    private final ReceiveCallback receiveCallback;
     public Choice choice;
     public int millis;
-    // 使用volatile关键字保证字段在c线程的可见性
-    public volatile boolean stop = true;
-    private final SendCallback sendCallback;
+    public volatile boolean stop = false;
 
-    public RandomChoiceThread(SendCallback sendCallback) {
+    /**
+     * @param sendCallback    发送数据回调函数
+     * @param receiveCallback 接收数据回调函数
+     */
+    public RandomChoiceThread(SendCallback sendCallback, ReceiveCallback receiveCallback) {
         this.sendCallback = sendCallback;
+        this.receiveCallback = receiveCallback;
     }
 
     @Override
@@ -35,14 +40,16 @@ public class RandomChoiceThread extends Thread {
             }
             choice = Choice.valueOf(random.nextInt(3));
             sendCallback.send(choice, millis);
-            stop = false;
-            while (!stop) {
-                Thread.onSpinWait();
-            }
+            receiveCallback.receive();
         }
+        stop = true;
     }
 
     public interface SendCallback {
         void send(Choice choice, int sleepDuration);
+    }
+
+    public interface ReceiveCallback {
+        void receive();
     }
 }

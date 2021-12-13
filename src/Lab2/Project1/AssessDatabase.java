@@ -23,6 +23,7 @@ public class AssessDatabase {
     private static PreparedStatement insertStatement;
     private static PreparedStatement deleteStatement;
     private static PreparedStatement viewStatement;
+    private static PreparedStatement viewAllStatement;
     private static PreparedStatement lUpdateStatement;
     private static PreparedStatement fUpdateStatement;
     private static PreparedStatement tUpdateStatement;
@@ -81,27 +82,14 @@ public class AssessDatabase {
 
         // 关闭所有资源
         try {
-            if (insertStatement != null) {
-                insertStatement.close();
-            }
-            if (deleteStatement != null) {
-                deleteStatement.close();
-            }
-            if (viewStatement != null) {
-                viewStatement.close();
-            }
-            if (eUpdateStatement != null) {
-                eUpdateStatement.close();
-            }
-            if (fUpdateStatement != null) {
-                fUpdateStatement.close();
-            }
-            if (lUpdateStatement != null) {
-                lUpdateStatement.close();
-            }
-            if (tUpdateStatement != null) {
-                tUpdateStatement.close();
-            }
+            closePreparedStatement(insertStatement);
+            closePreparedStatement(deleteStatement);
+            closePreparedStatement(viewStatement);
+            closePreparedStatement(viewAllStatement);
+            closePreparedStatement(eUpdateStatement);
+            closePreparedStatement(fUpdateStatement);
+            closePreparedStatement(lUpdateStatement);
+            closePreparedStatement(tUpdateStatement);
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +101,7 @@ public class AssessDatabase {
         System.out.println("help 查看指令");
         System.out.println("insert [id] [last name] [first name] [telephone] [email] 插入新员工信息");
         System.out.println("delete [id] 删除指定id员工信息");
-        System.out.println("view [id] 查询指定id的员工信息");
+        System.out.println("view [id] 查询指定id的员工信息, view all 查询所有员工信息");
         System.out.println("update [id] [-l|-f|-t|-e] [new data] 更新指定id的员工的指定信息\n" +
                 "-l: last name, -f: first name, -t: telephone, -e: email");
         System.out.println("exit 退出");
@@ -158,7 +146,7 @@ public class AssessDatabase {
 
     private static void view(String[] args) {
         if (args.length != 2) {
-            System.out.println("指令用法: view [id]");
+            System.out.println("指令用法: view [id], view all");
             return;
         }
         try {
@@ -166,8 +154,20 @@ public class AssessDatabase {
             if (viewStatement == null) {
                 viewStatement = conn.prepareStatement("select * from lab2.staff where id = ?;");
             }
-            viewStatement.setString(1, args[1]);
-            var rs = viewStatement.executeQuery();
+            PreparedStatement stm;
+            if (args[1].equals("all")) {
+                if (viewAllStatement == null) {
+                    viewAllStatement = conn.prepareStatement("select * from lab2.staff");
+                }
+                stm = viewAllStatement;
+            } else {
+                viewStatement.setString(1, args[1]);
+                stm = viewStatement;
+            }
+            var rs = stm.executeQuery();
+            if (!rs.next()) {
+                System.out.println("查无此人");
+            }
             while (rs.next()) {
                 System.out.println("id:" + rs.getString("id") +
                         " last name:" + rs.getString("lastName") +
@@ -224,6 +224,12 @@ public class AssessDatabase {
             updateStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void closePreparedStatement(PreparedStatement stm) throws SQLException {
+        if (stm != null) {
+            stm.close();
         }
     }
 }
