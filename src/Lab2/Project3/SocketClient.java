@@ -10,13 +10,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/05
- *     desc   :
- *     version:
- * </pre>
+ * SocketClient.java
  */
 public class SocketClient {
     public final static int SERVER_PORT = 11778;

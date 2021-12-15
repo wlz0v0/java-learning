@@ -1,6 +1,7 @@
 package Lab2.Project2;
 
 /**
+ * CompareRunnable.java
  * 比较字符类，实现Runnable，用于创建一个线程来比较字符
  */
 public class CompareRunnable implements Runnable {

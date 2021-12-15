@@ -3,6 +3,7 @@ package Lab2.Project2;
 import java.util.Random;
 
 /**
+ * RandomCharThread.java
  * 生成随机字符类，继承Thread
  */
 public class RandomCharThread extends Thread {

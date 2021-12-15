@@ -7,13 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.*;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/02
- *     desc   :
- *     version:
- * </pre>
+ * SocketServer.java
  */
 public class SocketServer {
     public final static int round = 20;

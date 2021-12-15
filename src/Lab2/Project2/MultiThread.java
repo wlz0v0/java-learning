@@ -1,13 +1,7 @@
 package Lab2.Project2;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/02
- *     desc   :
- *     version:
- * </pre>
+ * MultiThread.java
  */
 public class MultiThread {
     public final static int ROUND = 20;

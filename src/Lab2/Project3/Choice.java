@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 /**
+ * Choice.java
  * 定义石头剪刀布三种选择的枚举类<br>
  * 实现Serializable以通过网络传输
  */

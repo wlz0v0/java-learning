@@ -3,13 +3,7 @@ package Lab2.Project3;
 import java.util.Random;
 
 /**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/03
- *     desc   :
- *     version:
- * </pre>
+ * RandomChoiceThread.java
  */
 public class RandomChoiceThread extends Thread {
     private final SendInterface sendCallback;

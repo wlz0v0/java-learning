@@ -150,10 +150,6 @@ public class AssessDatabase {
             return;
         }
         try {
-            // 采用懒加载
-            if (viewStatement == null) {
-                viewStatement = conn.prepareStatement("select * from lab2.staff where id = ?;");
-            }
             PreparedStatement stm;
             if (args[1].equals("all")) {
                 if (viewAllStatement == null) {
@@ -161,6 +157,10 @@ public class AssessDatabase {
                 }
                 stm = viewAllStatement;
             } else {
+                // 采用懒加载
+                if (viewStatement == null) {
+                    viewStatement = conn.prepareStatement("select * from lab2.staff where id = ?;");
+                }
                 viewStatement.setString(1, args[1]);
                 stm = viewStatement;
             }
@@ -168,13 +168,14 @@ public class AssessDatabase {
             if (!rs.next()) {
                 System.out.println("查无此人");
             }
-            while (rs.next()) {
+            do {
                 System.out.println("id:" + rs.getString("id") +
                         " last name:" + rs.getString("lastName") +
                         " first name:" + rs.getString("firstName") +
                         " telephone:" + rs.getString("telephone") +
                         " email:" + rs.getString("email"));
-            }
+            } while (rs.next());
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
