@@ -1,21 +1,18 @@
 package FinalTerm.Question3;
 
-/**
- * <pre>
- *     author : 武连增
- *     e-mail : wulianzeng@bupt.edu.cn
- *     time   : 2021/12/16
- *     desc   :
- *     version:
- * </pre>
- */
 public class Subscriber {
     private final Buffer buffer;
 
+    /**
+     * @param buffer 从该缓冲区中接收消息
+     */
     public Subscriber(Buffer buffer) {
         this.buffer = buffer;
     }
 
+    /**
+     * 获取一条消息
+     */
     public void subscribe() {
         int num = buffer.getMessage();
         System.out.println("Subscribe " + num);
