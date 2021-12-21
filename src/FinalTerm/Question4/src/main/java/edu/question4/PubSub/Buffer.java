@@ -1,4 +1,4 @@
-package FinalTerm.Question3;
+package edu.question4.PubSub;
 
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -22,17 +22,16 @@ public class Buffer {
      * @param msg 将一条消息加入缓冲区队列的队尾
      */
     public void putMessage(int msg) {
-        // 当等待时被打断就再put一次，如果是其他的异常则不put
-        boolean flag;
-        do {
+        boolean isPut = false;
+        // 当put被打断时重新尝试put
+        while (!isPut) {
             try {
                 buffer.put(msg);
-                flag = false;
+                isPut = true;
             } catch (InterruptedException e) {
-                flag = true;
                 e.printStackTrace();
             }
-        } while (flag);
+        }
     }
 
     /**
@@ -40,14 +39,14 @@ public class Buffer {
      */
     public int getMessage() {
         int res = -1;
-        // 当等待时被打断就再take一次，直到成功为止
-        do {
+        // 当take被打断时重新尝试take
+        while (res == -1) {
             try {
                 res = buffer.take();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } while (res == -1);
+        }
         return res;
     }
 }
