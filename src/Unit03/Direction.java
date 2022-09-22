@@ -10,30 +10,13 @@ package Unit03;
  * </pre>
  */
 public enum Direction {
-    EAST,
-    WEST,
-    NORTH,
-    SOUTH;
+    EAST, NORTH, WEST, SOUTH; // 东北西南，左转下标增加
 
-    Direction left;
-    Direction right;
-
-    public static void bindDirections() {
-        EAST.left = NORTH;
-        EAST.right = SOUTH;
-        WEST.right = NORTH;
-        WEST.left = SOUTH;
-        NORTH.left = WEST;
-        NORTH.right = EAST;
-        SOUTH.left = EAST;
-        SOUTH.right = WEST;
+    public Direction left() {
+        return Direction.values()[(this.ordinal() + 1) % 4];
     }
 
-    public Direction turnLeft() {
-        return this.left;
-    }
-
-    public Direction turnRight() {
-        return this.right;
+    public Direction right() {
+        return Direction.values()[(this.ordinal() + 4 - 1) % 4];
     }
 }

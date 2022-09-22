@@ -20,7 +20,6 @@ public class Robot {
     }
 
     public Robot(String name, int x, int y, Direction direction) {
-        Direction.bindDirections();
         this.name = name;
         this.position = new Coordinate(x, y);
         this.direction = direction;
@@ -56,11 +55,11 @@ public class Robot {
     }
 
     public void turnLeft() {
-        direction = direction.turnLeft();
+        direction = direction.left();
     }
 
     public void turnRight() {
-        direction = direction.turnRight();
+        direction = direction.right();
     }
 
     public Coordinate getPosition() {
