@@ -18,7 +18,6 @@ public class Quiz07 {
         a = scanner.nextInt();
         b = scanner.nextInt();
 
-        assert b != 0 : "divisor must not be zero!";
         try {
             System.out.println(divide(a, b));
         } catch (DividingZero e) {
@@ -26,9 +25,14 @@ public class Quiz07 {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             System.out.println("Done");
         }
+        setDividend(b);
+    }
+
+    private static void setDividend(int num) {
+        assert num != 0 : "divisor must not be zero!";
     }
 
     private static double divide(int a, int b) throws DividingZero {

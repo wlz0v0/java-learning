@@ -1,7 +1,6 @@
 package Unit06;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 
 /**
  * <pre>
@@ -13,18 +12,32 @@ import java.nio.charset.StandardCharsets;
  * </pre>
  */
 public class Quiz03 {
+
     public static void main(String[] args) {
-        var copy = new File(".\\copy.txt");
+        var copy = new File("./copy.txt");
         if (!copy.exists()) {
             try {
+                //noinspection ResultOfMethodCallIgnored
                 copy.createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
+        var file = new File("./file.txt");
+        if (!file.exists()) {
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                copy.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Quiz02.writeFile(file, "this is info in file");
+        }
+
         byte[] bytes = new byte[100];
         int len = 0;
-        try (var inputStream = new FileInputStream(".\\file.txt")) {
+        try (var inputStream = new FileInputStream("./file.txt")) {
             len = inputStream.read(bytes);
         } catch (IOException e) {
             e.printStackTrace();
