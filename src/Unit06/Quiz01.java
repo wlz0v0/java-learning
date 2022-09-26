@@ -13,7 +13,7 @@ import java.io.File;
  */
 public class Quiz01 {
     public static void main(String[] args) {
-        var file = new File(".\\test.txt");
+        var file = new File("./test.txt");
         if (file.exists()) {
             System.out.println(file.getAbsolutePath());
             System.out.println(file.length());
