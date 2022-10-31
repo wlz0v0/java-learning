@@ -12,22 +12,35 @@ package Unit07;
 public class Quiz5 {
     static int x = 0;
 
-    public static void main(String[] args) {
-        new Thread(Quiz5::add).start();
-        new Thread(Quiz5::subtract).start();
+    public static void main(String[] args) throws InterruptedException {
+        var addThread = new Thread(Quiz5::add);
+        var subThread = new Thread(Quiz5::subtract);
+
+        addThread.start();
+        subThread.start();
+
+        subThread.join();
+        subThread.join();
     }
 
-    public static synchronized void add() {
+    public static synchronized void addX() {
+        ++x;
+    }
+
+    public static synchronized void subtractAndPrintX() {
+        --x;
+        System.out.print(x + " ");
+    }
+
+    public static void add() {
         for (int i = 0; i < 20; ++i) {
-            ++x;
-            System.out.print(x + " ");
+            addX();
         }
     }
 
-    public static synchronized void subtract() {
+    public static void subtract() {
         for (int i = 0; i < 20; ++i) {
-            --x;
-            System.out.print(x + " ");
+            subtractAndPrintX();
         }
     }
 }

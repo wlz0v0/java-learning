@@ -1,6 +1,5 @@
 package Unit07;
 
-import java.util.concurrent.Executors;
 
 /**
  * <pre>
@@ -12,54 +11,42 @@ import java.util.concurrent.Executors;
  * </pre>
  */
 public class Quiz3 {
-    public static void main(String[] args) {
-        var executor = Executors.newFixedThreadPool(3);
-        var printChar = new PrintChar('a');
-//        executor.execute(new PrintChar('a'));
-//        executor.execute(new PrintNum(printChar));
-//        executor.execute(printChar);
-        var printNum = new Thread(new PrintNum(printChar));
+    public static void main(String[] args) throws InterruptedException {
+        var printChar = new PrintCharThread();
+        var printNum = new Thread(new PrintNumRunnable(printChar));
+
         printChar.start();
         printNum.start();
 
-        executor.shutdown();
-        System.out.println("Main finished");
+        printChar.join();
+        printNum.join();
     }
 }
 
-class PrintChar extends Thread {
-    private final char start;
-
-    public PrintChar(char start) {
-        this.start = start;
-    }
-
+class PrintCharThread extends Thread {
     @Override
     public void run() {
-        char a = start;
-        int cnt = 26;
-        while (cnt-- != 0) {
-            System.out.print(a++ + " ");
-            if (a == 'o') {
-                PrintChar.yield();
+        for (char i = 'a'; i <= 'z'; i++) {
+            System.out.printf("%c ", i);
+            if (i == 'o') {
+                PrintCharThread.yield();
             }
         }
     }
 }
 
-class PrintNum implements Runnable {
+class PrintNumRunnable implements Runnable {
     private final Thread charThread;
 
-    public PrintNum(Thread thread) {
+    public PrintNumRunnable(Thread thread) {
         this.charThread = thread;
     }
 
     @Override
     public void run() {
-        int num = 0;
-        while (num++ != 26) {
-            System.out.print(num + " ");
-            if (num == 20) {
+        for (int i = 1; i <= 26; i++) {
+            System.out.printf("%d ", i);
+            if (i == 20) {
                 try {
                     charThread.join();
                 } catch (InterruptedException e) {
